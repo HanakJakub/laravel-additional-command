@@ -1,0 +1,34 @@
+{
+    "name": "jakubhanak/laravel-additional-command",
+    "description": "Additional artisan command to Laravel framework",
+    "keywords": [
+      "Artisan",
+      "Console",
+      "Commands",
+      "Laravel"
+    ],
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+      {
+        "name": "Jakub Hanák",
+        "email": "jakub.hanak2@gmail.com"
+      }
+    ],
+    "require": {
+      "php": ">=7.0",
+      "laravel/framework": "~5.5.0"
+    },
+    "autoload": {
+      "psr-4": {
+        "Hanak\\ArtisanCommand\\": "src"
+      }
+    },
+    "extra": {
+      "laravel": {
+        "providers": [
+          "Hanak\\ArtisanCommand\\ArtisanCommandServiceProvider"
+        ]
+      }
+    }
+  }
