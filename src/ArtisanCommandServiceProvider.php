@@ -14,7 +14,7 @@ class ArtisanCommandServiceProvider extends ServiceProvider
     {
         if ($this->app->runningInConsole()) {
             $this->commands([
-                Commands\StringsCombinations::class,
+                Commands\StringCombinations::class,
             ]);
         }
     }
