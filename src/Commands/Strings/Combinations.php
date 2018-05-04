@@ -27,25 +27,81 @@ class Combinations extends Command
     protected $signature = 'string:combine {strings*}';
 
     /**
+     * Array of strings from the input
+     *
+     * @var array
+     */
+    protected $strings;
+
+    /**
+     * Array of string pairs
+     *
+     * @var array
+     */
+    protected $result;
+
+    /**
      * Execute the console command.
      *
      * @return mixed
      */
     public function handle()
     {
-        $strings = $this->argument('strings');
+        $this->prepareStrings();
 
-        $size = count($strings);
+        if ($this->strings->count() == 1) {
+            return $this->error('Type more than one string divided by comma or blank space!');
+        }
+
+        if ($this->strings->count() >= 10) {
+            return $this->error('Type less than 10 strings');
+        }
+
+        $this->getResult();
+        
+        $this->result->each(function ($row) {
+            $this->line($row);
+        });
+
+        $this->line('');
+        $this->line("Number of valid strings: {$this->strings->count()}");
+        $this->line("Number of pairs combination whitout repetition: {$this->result->count()}");
+    }
+
+    /**
+     * Prepare strings array for creating result
+     *
+     * @return void
+     */
+    public function prepareStrings()
+    {
+        $this->strings = collect($this->argument('strings'));
+
+        if ($this->strings->count() == 1) {
+            $this->strings = trim($this->strings[0], ',');
+            $this->strings = collect(explode(',', $this->strings));
+        }
+
+        $this->strings = $this->strings->unique()->values();
+    }
+
+    /**
+     * Create result array
+     *
+     * @return void
+     */
+    public function getResult()
+    {
+        $size = count($this->strings);
 
         $count = 0;
-        foreach ($strings as $row) {
+        foreach ($this->strings as $row) {
             for ($i = $count+1 ; $i <= $size-1; $i++) {
-                $result[] = $strings[$count] . ' ' . $strings[$i];
+                $this->result[] = $this->strings[$count] . ' ' . $this->strings[$i];
             }
             $count++;
         }
-        foreach ($result as $row) {
-            $this->line($row);
-        }
+
+        $this->result = collect($this->result);
     }
 }
