@@ -37,7 +37,6 @@ Example of usage.
 ```
 php artisan string:combine one two three
 php artisan string:combine one,two,three
-
 ```
 
 ## Licence
