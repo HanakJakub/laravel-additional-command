@@ -1,9 +1,9 @@
 <?php
-namespace Hanak\ArtisanCommand\Commands;
+namespace Hanak\ArtisanCommand\Commands\Strings;
 
 use Illuminate\Console\Command;
 
-class StringCombinations extends Command
+class Combinations extends Command
 {
     /**
      * The console command name.
