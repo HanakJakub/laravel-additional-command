@@ -27,38 +27,20 @@ class Combinations extends Command
     protected $signature = 'string:combine {strings*}';
 
     /**
-     * Array of strings from input
-     *
-     * @var array
-     */
-    protected $strings;
-
-    /**
-    * Create a new command instance.
-    *
-    * @param  array  $strings
-    * @return void
-    */
-    public function __construct($strings)
-    {
-        parent::__construct();
-
-        $this->strings = $strings;
-    }
-
-    /**
      * Execute the console command.
      *
      * @return mixed
      */
     public function handle()
     {
-        $size = count($this->strings);
+        $strings = $this->argument('strings');
+
+        $size = count($strings);
 
         $count = 0;
-        foreach ($this->strings as $row) {
+        foreach ($strings as $row) {
             for ($i = $count+1 ; $i <= $size-1; $i++) {
-                $result[] = $this->strings[$count] . ' ' . $this->strings[$i];
+                $result[] = $strings[$count] . ' ' . $strings[$i];
             }
             $count++;
         }
